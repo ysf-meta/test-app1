@@ -2,7 +2,8 @@ name: CD Deploy to EKS
 
 on:
   workflow_run:
-    workflows: ["ecr"]
+    workflows:
+      - "ecr"
     types:
       - completed
 
@@ -23,9 +24,9 @@ jobs:
 
       - name: Authenticate Docker with ECR
         run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 563940537117.dkr.ecr.us-east-1.amazonaws.com/test-app1:sample_image
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 563940537117.dkr.ecr.us-east-1.amazonaws.com
 
       - name: Deploy to EKS
         run: |
-          kubectl apply -f path/to/your/kubernetes/manifests
-
+          kubectl apply -f manifests/hello-app-deployment.yaml
+          kubectl apply -f manifests/hello-app-service.yaml
