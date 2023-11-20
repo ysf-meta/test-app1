@@ -3,7 +3,7 @@ name: CD Deploy to EKS
 on:
   workflow_run:
     workflows:
-      - "ecr"
+      - "Build and push image to ECR"
     types:
       - completed
 
