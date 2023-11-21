@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: DOCKER_IMAGE
+        image: test-app1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
