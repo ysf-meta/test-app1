@@ -1,4 +1,4 @@
-name: Build and push image to ECR and deploy to EKS
+name: ECR ad EKS
 
 on: push
   
@@ -40,6 +40,6 @@ jobs:
       run: aws eks update-kubeconfig --name Kubernetes-demo --region us-east-1
 
     - name: Deploy to EKS
-        run: |
-          kubectl apply -f manifests/hello-app-deployment.yaml
-          kubectl apply -f manifests/hello-app-service.yaml
+      run: |
+        kubectl apply -f manifests/hello-app-deployment.yaml
+        kubectl apply -f manifests/hello-app-service.yaml
