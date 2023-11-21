@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: 607532348214.dkr.ecr.us-east-1.amazonaws.com/test-app1
+        image: 927770512418.dkr.ecr.us-east-1.amazonaws.com/test-app1:sample_image
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
