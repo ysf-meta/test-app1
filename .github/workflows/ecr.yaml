@@ -34,16 +34,21 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: test-app1
+        ECR_REPOSITORY: test-app2
         IMAGE_TAG: v8
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --name Cluster-app1 --region us-east-1
+      run: aws eks update-kubeconfig --name Cluster-app2 --region us-east-1
 
     - name: Deploy to EKS
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}    
+        ECR_REPOSITORY: test-app2    
+        IMAGE_TAG: v8
       run: |
+        sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" manifests/deployment.yaml && \
         kubectl apply -f manifests/deployment.yaml
         kubectl apply -f manifests/service.yaml

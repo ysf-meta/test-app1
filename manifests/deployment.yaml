@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: 211446123712.dkr.ecr.us-east-1.amazonaws.com/test-app1:v8
+        image: DOCKER_IMAGE
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
